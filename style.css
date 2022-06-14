@@ -267,6 +267,7 @@ blockquote {
   font-style: italic;
   padding: 35px 30px;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -284,6 +285,11 @@ blockquote cite {
 blockquote em,
 blockquote i {
   font-style: normal;
+}
+.rating-stars {
+  color: gold; 
+  width:auto; 
+  font-size:20px;
 }
 abbr,
 acronym {
@@ -477,8 +483,8 @@ p > video {
   z-index: 100000;
 }
 #proud-section {
-  margin-bottom: 0%; 
-  background-color:#ffc925;
+  margin-bottom: 0%;
+  background-color: #ffc925;
   padding: 5%;
 }
 
