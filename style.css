@@ -242,6 +242,7 @@ textarea {
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
 }
+
 img {
   height: auto;
   max-width: 100%;
@@ -287,9 +288,9 @@ blockquote i {
   font-style: normal;
 }
 .rating-stars {
-  color: gold; 
-  width:auto; 
-  font-size:20px;
+  color: gold;
+  width: auto;
+  font-size: 20px;
 }
 abbr,
 acronym {
@@ -1977,8 +1978,8 @@ p.dropcap span.first-letter {
 #main-nav > ul > li > a {
   display: block;
   font-family: "Montserrat", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   color: #777;
   text-transform: uppercase;
 }
