@@ -476,6 +476,11 @@ p > video {
   width: auto;
   z-index: 100000;
 }
+#proud-section {
+  margin-bottom: 0%; 
+  background-color:#ffc925;
+  padding: 5%;
+}
 
 /* Forms
 -------------------------------------------------------------- */
@@ -3913,7 +3918,9 @@ body.page #main-content {
     padding-top: 15px;
     padding-bottom: 15px;
   }
-
+  .fa .fa-star {
+    color: gold;
+  }
   #site-header.style-2 #site-logo {
     margin-top: 0;
   }
@@ -3946,6 +3953,13 @@ body.page #main-content {
     line-height: 45px;
     font-size: 16px;
   }
+}
+.content-make-center {
+  text-align: center;
+}
+
+#copyright {
+  font-size: medium;
 }
 
 @media only screen and (max-width: 767px) {
