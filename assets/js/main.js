@@ -26,7 +26,7 @@
         self.heroSection();
 
         // Scroll to Target
-        self.scrollTarget();
+        // self.scrollTarget();
 
         // Header Sticky
         self.headerFixed();
@@ -211,38 +211,38 @@
       }, 2500);
     },
 
-    scrollTarget: function () {
-      $(".scroll-target, .one-page #main-nav > ul > li > a").on(
-        "click",
-        function () {
-          var anchor = $(this).attr("href").split("#")[1];
+    // scrollTarget: function () {
+    //   $(".scroll-target, .one-page #main-nav > ul > li > a").on(
+    //     "click",
+    //     function () {
+    //       var anchor = $(this).attr("href").split("#")[1];
 
-          $(this)
-            .parent()
-            .addClass("current-menu-item")
-            .siblings()
-            .removeClass("current-menu-item");
+    //       $(this)
+    //         .parent()
+    //         .addClass("current-menu-item")
+    //         .siblings()
+    //         .removeClass("current-menu-item");
 
-          if (anchor) {
-            if ($("#" + anchor).length > 0) {
-              var headerHeight = 0;
+    //       if (anchor) {
+    //         if ($("#" + anchor).length > 0) {
+    //           var headerHeight = 0;
 
-              if ($("body").hasClass("header-sticky"))
-                headerHeight = $("#site-header").height();
+    //           if ($("body").hasClass("header-sticky"))
+    //             headerHeight = $("#site-header").height();
 
-              var target = $("#" + anchor).offset().top - headerHeight;
+    //           var target = $("#" + anchor).offset().top - headerHeight;
 
-              $("html,body").animate(
-                { scrollTop: target },
-                1200,
-                "easeInOutExpo"
-              );
-            }
-          }
-          return false;
-        }
-      );
-    },
+    //           $("html,body").animate(
+    //             { scrollTop: target },
+    //             1200,
+    //             "easeInOutExpo"
+    //           );
+    //         }
+    //       }
+    //       return false;
+    //     }
+    //   );
+    // },
 
     tabs: function () {
       $(".woocommerce-tabs").each(function () {
