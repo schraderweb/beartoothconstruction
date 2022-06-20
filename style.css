@@ -639,7 +639,7 @@ input[type="reset"],
 input[type="submit"] {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  background-color: #ffc925;
+  background-color: #f1b064;
   color: #fff;
   padding: 1.285em 2.642em;
   border-radius: 3px;
@@ -3362,7 +3362,9 @@ body.page #main-content {
 #footer-widgets .widget.widget_twitter .cbp-nav-pagination {
   bottom: -50px;
 }
-
+.changeBg {
+  background-color: #f1b064;
+}
 /* Widget Links */
 #sidebar .widget.widget_links ul li,
 #footer-widgets .widget.widget_links ul li {

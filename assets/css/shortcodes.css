@@ -17,7 +17,7 @@
 
 #promotion.wprt-section {
   padding: 32px 0;
-  background-color: #ffc925;
+  background-color: #f1b064;
 }
 
 .wprt-section.about-page {
@@ -806,8 +806,8 @@
   display: inline-block;
   padding: 0.72em 2.1em;
   letter-spacing: 2px;
-  background-color: #ffc925;
-  border: 2px solid #ffc925;
+  background-color: #f1b064;
+  border: 2px solid #f1b064;
   color: #fff;
   -webkit-transition: all ease 0.238s;
   -moz-transition: all ease 0.238s;

@@ -4,7 +4,6 @@ createApp({
   data() {
     return {
       collections: null,
-      path: "https://whispering-atoll-99593.herokuapp.com",
     };
   },
   async mounted() {
