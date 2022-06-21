@@ -4,6 +4,8 @@ createApp({
   data() {
     return {
       collections: null,
+      isTrue: false,
+      setUrl: null,
     };
   },
   async mounted() {
@@ -15,5 +17,14 @@ createApp({
         const { data } = res.data;
         this.collections = data;
       });
+  },
+  methods: {
+    getUrl(url) {
+      this.setUrl = url;
+      this.isTrue = true;
+    },
+    closeMe() {
+      this.isTrue = false;
+    },
   },
 }).mount("#app");
