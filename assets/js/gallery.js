@@ -8,8 +8,8 @@ createApp({
       setUrl: null,
     };
   },
-  async mounted() {
-    await axios
+  mounted() {
+    axios
       .get(
         "https://whispering-atoll-99593.herokuapp.com/api/posts?populate=images"
       )
