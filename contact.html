@@ -136,7 +136,8 @@
                                 </div><!-- /.col-md-4 -->
 
                                 <div class="col-md-8">
-                                    <form class="wprt-contact-form" method="post" action="./includes/contact/contact-process.php">
+                                  <div id="tripetto"></div>
+                                    <!-- <form class="wprt-contact-form" method="post" action="">
                                         <div class="inner">
                                             <div class="left-side">
                                                 <div class="input-wrap">
@@ -156,7 +157,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form><!-- /.wprt-contact-form -->
+                                    </form> -->
+                                    <!-- /.wprt-contact-form -->
                                 </div><!-- /.col-md-8 -->
 
                                 <div class="col-md-12">
@@ -507,5 +509,22 @@
 <script type="text/javascript" src="assets/js/owlCarousel.js"></script>
 <script type="text/javascript" src="assets/js/cube.portfolio.js"></script>
 <script type="text/javascript" src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tripetto-runner-foundation"></script>
+<script src="https://cdn.jsdelivr.net/npm/tripetto-runner-classic"></script>
+<script src="https://cdn.jsdelivr.net/npm/tripetto-services"></script>
+<script>
+var tripetto = TripettoServices.init({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaThnR0N3WktXZk5qNWMxU2N4MkpYdDdIQVNFY2MxMmlFeGRuZExTekkvWT0iLCJkZWZpbml0aW9uIjoiZm1VUnR3c3NVQi9QTkEwNFZMQ1VDMkdJLzJPRXZjTHJSaFVGSkU0dEU5VT0iLCJ0eXBlIjoiY29sbGVjdCJ9.BgET95IIfn1gKh-Ac44s0ewkHz-yCS-2cfDGxtfMaIY" });
+
+TripettoClassic.run({
+    element: document.getElementById("tripetto"),
+    definition: tripetto.definition,
+    styles: tripetto.styles,
+    l10n: tripetto.l10n,
+    locale: tripetto.locale,
+    translations: tripetto.translations,
+    attachments: tripetto.attachments,
+    onSubmit: tripetto.onSubmit
+});
+</script>
 </body>
 </html>
