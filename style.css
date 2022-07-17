@@ -581,13 +581,13 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   color: #777;
-  border: 1px solid #eaeaea;
+  border: 1px solid rgb(89, 87, 87);
   padding: 11px 19px;
   line-height: inherit;
   width: 100%;
   background-color: #f7f7f7;
   margin-bottom: 30px;
-  border-radius: 0;
+  border-radius: 4px;
   height: auto;
   -webkit-appearance: none;
   text-shadow: none;
