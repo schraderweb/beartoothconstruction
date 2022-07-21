@@ -533,7 +533,7 @@ $('#contact-form').on('submit', function(event) {
         contentType: false, // auto-detection
         processData: false // no need to parse formData to string
     }).done(function() {
-        alert('Your mail is sent!');
+        window.location.href="thank-you.html";
     }).fail(function(error) {
         alert('Oops... ' + JSON.stringify(error));
     });
