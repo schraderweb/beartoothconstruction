@@ -25,6 +25,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+
 </head>
 
 <body class="page no-sidebar header-style-1 menu-has-search menu-has-cart">
@@ -136,27 +139,23 @@
                                 </div><!-- /.col-md-4 -->
 
                                 <div class="col-md-8">
-                                 <form class="wprt-contact-form" action="https://formsubmit.co/08ac20214b8f490fa6ce62104f6e62b4" method="post">
-                                  <input type="text" name="_honey" style="display:none">
+                                 <form id="contact-form" class="wprt-contact-form" method="POST">
                                         <div class="inner">
                                             <div class="left-side">
                                                 <div class="input-wrap">
-                                                    <input type="text" value="" tabindex="1" placeholder="Name *" name="name" id="name" required>
+                                                    <input type="text" value="" tabindex="1" placeholder="Name *" id="name" name="name" id="name" required>
                                                 </div>
                                                 <div class="input-wrap">
-                                                    <input type="email" value="" tabindex="2" placeholder="Email *" name="email" id="email" required>
+                                                    <input type="email" value="" tabindex="2" placeholder="Email *" id="email" name="email" id="email" required>
                                                 </div>
                                                 <div class="input-wrap">
-                                                    <input type="text" value="" tabindex="4" placeholder="Subject *" name="subject" id="subject" required>
+                                                    <input type="text" value="" tabindex="4" placeholder="Subject *" id="subject" name="subject" id="subject" required>
                                                 </div>
                                                 <div class="message-wrap">
                                                     <textarea class="" tabindex="5" placeholder="Message *" name="message" id="message" required></textarea>
                                                 </div>
-                                                <input type="hidden" name="_next" value="https://beartoothconstruction.com/thank-you.html">
-                                                <input type="hidden" name="_captcha" value="false">
-                                                <input type="hidden" name="_template" value="table">
                                                 <div class="send-wrap">
-                                                    <button type="submit"  id="submit" name="submit" class="submit">Please Click To Send</button>
+                                                    <button type="submit"  id="submit" name="submit" class="submit" >Please Click To Send</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -503,6 +502,7 @@
 <a id="scroll-top">TOP</a>
 
 <!-- Javascript -->
+
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/animsition.js"></script>
@@ -514,5 +514,31 @@
 <script type="text/javascript" src="assets/js/owlCarousel.js"></script>
 <script type="text/javascript" src="assets/js/cube.portfolio.js"></script>
 <script type="text/javascript" src="assets/js/main.js"></script>
+<script type="text/javascript"
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+
+<script type="text/javascript">
+$('#contact-form').on('submit', function(event) {
+    event.preventDefault(); // prevent reload
+    
+    var formData = new FormData(this);
+    formData.append('service_id', 'service_71ak42l');
+    formData.append('template_id', 'template_aw4yfpd');
+    formData.append('user_id', 'whKDP8b3dGjg3cNRX');
+ 
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
+        type: 'POST',
+        data: formData,
+        contentType: false, // auto-detection
+        processData: false // no need to parse formData to string
+    }).done(function() {
+        alert('Your mail is sent!');
+    }).fail(function(error) {
+        alert('Oops... ' + JSON.stringify(error));
+    });
+});
+</script>
+
 </body>
 </html>
