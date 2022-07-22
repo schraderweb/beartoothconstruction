@@ -3610,6 +3610,7 @@ body.page #main-content {
 -------------------------------------------------------------- */
 #footer {
   background-color: #1a1a1a;
+  margin-top: -20px;
   padding: 80px 0 70px;
   position: relative;
   z-index: 1;
