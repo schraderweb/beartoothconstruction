@@ -139,23 +139,27 @@
                                 </div><!-- /.col-md-4 -->
 
                                 <div class="col-md-8">
-                                 <form id="contact-form" class="wprt-contact-form" method="POST">
+                                  <form id="contact-form" class="wprt-contact-form" method="POST" action="/api/contact">
                                         <div class="inner">
                                             <div class="left-side">
                                                 <div class="input-wrap">
-                                                    <input type="text" value="" tabindex="1" placeholder="Name *" id="name" name="name" id="name" required>
+                                                    <input type="text" value="" tabindex="1" placeholder="Name *" id="name" name="name" required>
                                                 </div>
                                                 <div class="input-wrap">
-                                                    <input type="email" value="" tabindex="2" placeholder="Email *" id="email" name="email" id="email" required>
+                                                    <input type="email" value="" tabindex="2" placeholder="Email *" id="email" name="email" required>
                                                 </div>
                                                 <div class="input-wrap">
-                                                    <input type="text" value="" tabindex="4" placeholder="Subject *" id="subject" name="subject" id="subject" required>
+                                                    <input type="text" value="" tabindex="4" placeholder="Subject *" id="subject" name="subject" required>
                                                 </div>
                                                 <div class="message-wrap">
                                                     <textarea class="" tabindex="5" placeholder="Message *" name="message" id="message" required></textarea>
                                                 </div>
+                                                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                                                    <label for="website">Website</label>
+                                                    <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                                                </div>
                                                 <div class="send-wrap">
-                                                    <button type="submit"  id="submit" name="submit" class="submit" >Please Click To Send</button>
+                                                    <button type="submit" id="submit" name="submit" class="submit">Please Click To Send</button>
                                                 </div>
                                             </div>
                                         </div>

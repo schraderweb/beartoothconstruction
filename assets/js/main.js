@@ -933,40 +933,56 @@
           $(this).validate({
             submitHandler: function (form) {
               var $form = $(form),
+                $submit = $form.find('button[type="submit"]'),
                 str = $form.serialize();
 
               $.ajax({
                 type: "POST",
                 url: $form.attr("action"),
                 data: str,
+                dataType: "json",
+                timeout: 15000,
                 beforeSend: function () {
                   $form.find(".wprt-alert").remove();
+                  $submit.prop("disabled", true);
                 },
-                success: function (msg) {
-                  var result, cls;
+                success: function (response) {
+                  if (response && response.ok) {
+                    var $confirmation = $("<div />", {
+                      class: "wprt-alert success wprt-contact-success",
+                      role: "status",
+                      tabindex: "-1",
+                      text: "Thank You For Contacting Us! We Will Be In Touch Soon.",
+                    });
 
-                  if (msg == "Success") {
-                    result = "Your message has been sent. Thank you!";
-                    cls = "success";
-                  } else {
-                    result = "Error sending email.";
-                    cls = "error";
+                    $form.replaceWith($confirmation);
+                    $confirmation.trigger("focus");
+                    return;
                   }
 
-                  $form.prepend(
-                    $("<div />", {
-                      class: "wprt-alert " + cls,
-                      text: result,
-                    }).append(
-                      $(
-                        '<a class="remove" href="#"><i class="fa fa-close"></i></a>'
-                      )
-                    )
-                  );
-
-                  $form.find(":input").not(".submit").val("");
+                  showError("We could not send your message. Please try again.");
+                },
+                error: function () {
+                  showError("We could not send your message. Please try again.");
+                },
+                complete: function () {
+                  $submit.prop("disabled", false);
                 },
               });
+
+              function showError(message) {
+                $form.find(".wprt-alert").remove();
+                $form.prepend(
+                  $("<div />", {
+                    class: "wprt-alert error",
+                    text: message,
+                  }).append(
+                    $(
+                      '<a class="remove" href="#"><i class="fa fa-close"></i></a>'
+                    )
+                  )
+                );
+              }
             },
           });
         });
