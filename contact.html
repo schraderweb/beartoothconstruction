@@ -158,6 +158,7 @@
                                                     <label for="website">Website</label>
                                                     <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
                                                 </div>
+                                                <input type="hidden" name="recaptcha_token" id="recaptcha_token">
                                                 <div class="send-wrap">
                                                     <button type="submit" id="submit" name="submit" class="submit">Please Click To Send</button>
                                                 </div>
@@ -522,5 +523,68 @@ sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading
 <script src="assets/js/vue.js"></script>
 <script src="assets/js/axios.min.js"></script>
 <script src="assets/js/gallery.js"></script>
+
+    <!-- Invisible CAPTCHA (Google reCAPTCHA v3) -->
+    <script>
+      (function () {
+        // Public reCAPTCHA v3 site key. Leave blank to disable the captcha
+        // (the form keeps working and relies on the honeypot only).
+        var RECAPTCHA_SITE_KEY = "6LeRepwtAAAAAFk1jsr1jTg0afpd7M0bQb244Xpo";
+        var RECAPTCHA_ACTION = "contact";
+
+        if (!RECAPTCHA_SITE_KEY) {
+          return;
+        }
+
+        var tokenField = document.getElementById("recaptcha_token");
+        if (!tokenField) {
+          return;
+        }
+
+        var script = document.createElement("script");
+        script.src =
+          "https://www.google.com/recaptcha/api.js?render=" +
+          encodeURIComponent(RECAPTCHA_SITE_KEY);
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        function refreshToken() {
+          if (!window.grecaptcha || !window.grecaptcha.execute) {
+            return;
+          }
+          window.grecaptcha.ready(function () {
+            window.grecaptcha
+              .execute(RECAPTCHA_SITE_KEY, { action: RECAPTCHA_ACTION })
+              .then(function (token) {
+                tokenField.value = token;
+              })
+              .catch(function () {
+                /* leave token empty; server will reject if required */
+              });
+          });
+        }
+
+        script.addEventListener("load", function () {
+          refreshToken();
+          // Tokens expire after ~2 minutes; refresh periodically so the
+          // value is fresh whenever the visitor submits.
+          setInterval(refreshToken, 90000);
+        });
+
+        // Also refresh right before a submit to minimise the chance of an
+        // expired token.
+        var form = document.getElementById("contact-form");
+        if (form) {
+          form.addEventListener(
+            "submit",
+            function () {
+              refreshToken();
+            },
+            true
+          );
+        }
+      })();
+    </script>
   </body>
 </html>

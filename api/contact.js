@@ -41,6 +41,72 @@ const FIELD_LIMITS = {
 let database;
 let tableReady;
 
+const RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+const RECAPTCHA_MIN_SCORE = Number(process.env.RECAPTCHA_MIN_SCORE || 0.5);
+const RECAPTCHA_EXPECTED_ACTION = "contact";
+
+function getClientIp(request) {
+  const forwarded = request.headers && request.headers["x-forwarded-for"];
+
+  if (forwarded) {
+    return String(forwarded).split(",")[0].trim();
+  }
+
+  return (
+    (request.socket && request.socket.remoteAddress) ||
+    (request.connection && request.connection.remoteAddress) ||
+    undefined
+  );
+}
+
+// Verifies the invisible reCAPTCHA v3 token. Returns { ok: true } when the
+// captcha passes, or when it is not configured (so local dev keeps working).
+async function verifyCaptcha(token, remoteIp) {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!secret) {
+    return { ok: true, skipped: true };
+  }
+
+  if (!token) {
+    return { ok: false, error: "Captcha verification failed. Please try again." };
+  }
+
+  const params = new URLSearchParams({ secret, response: token });
+
+  if (remoteIp) {
+    params.set("remoteip", remoteIp);
+  }
+
+  let data = {};
+
+  try {
+    const response = await fetch(RECAPTCHA_VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
+    data = await response.json();
+  } catch (error) {
+    console.error("reCAPTCHA verification request failed", { error: error.message });
+    return { ok: false, error: "Captcha verification failed. Please try again." };
+  }
+
+  if (!data.success) {
+    return { ok: false, error: "Captcha verification failed. Please try again." };
+  }
+
+  if (data.action && data.action !== RECAPTCHA_EXPECTED_ACTION) {
+    return { ok: false, error: "Captcha verification failed. Please try again." };
+  }
+
+  if (typeof data.score === "number" && data.score < RECAPTCHA_MIN_SCORE) {
+    return { ok: false, error: "Your submission looked automated. Please try again." };
+  }
+
+  return { ok: true };
+}
+
 function getRequiredEnv(name) {
   const value = process.env[name];
 
@@ -390,6 +456,15 @@ async function handler(request, response) {
 
   if (normalize(body.website)) {
     return sendJson(response, 200, { ok: true });
+  }
+
+  const captcha = await verifyCaptcha(
+    normalize(body.recaptcha_token),
+    getClientIp(request)
+  );
+
+  if (!captcha.ok) {
+    return sendJson(response, 400, { ok: false, message: captcha.error });
   }
 
   const validation = validateForm(body);
